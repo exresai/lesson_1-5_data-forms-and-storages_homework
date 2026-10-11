@@ -68,7 +68,6 @@
                 <p class="card-form__kicker">Редактирование</p>
                 <h3 class="card-form__title">Данные карточки</h3>
               </div>
-              <p class="card-form__note">Добавьте еще минимум три осмысленных поля</p>
             </header>
 
             <!-- Это один пример связки label, id и name. Остальные поля создайте сами. -->
@@ -124,11 +123,11 @@
                 class="field__control"
                 id="card-description"
                 name="description"
-                minlength="20"
+                minlength="10"
                 placeholder="Опишите, что вы увидели"
                 required
               ></textarea>
-              <span class="field__hint">Минимум 20 символов</span>
+              <span class="field__hint">Минимум 10 символов</span>
             </div>
             <!-- Добавьте поля, которые описывают именно вашу тему. -->
 
@@ -148,13 +147,23 @@
           <p class="app-state__index">03</p>
 
           <article class="saved-card">
-            <p class="saved-card__label">Сохраненная карточка</p>
+            <p class="saved-card__label">Сохраненная аномалия</p>
             <h3 class="saved-card__title">Название появится здесь</h3>
 
             <dl class="saved-card__details">
               <div class="saved-card__row">
-                <dt>Свойство</dt>
-                <dd>Значение</dd>
+                <dt>Тип аномалии</dt>
+                <dd id="saved-card-type">—</dd>
+              </div>
+
+              <div class="saved-card__row">
+                <dt>Уровень опасности</dt>
+                <dd id="saved-card-danger">—</dd>
+              </div>
+              
+              <div class="saved-card__row">
+                <dt>Описание</dt>
+                <dd id="saved-card-description">—</dd>
               </div>
               <!-- Добавьте строки или другую разметку для всех полей формы. -->
             </dl>
