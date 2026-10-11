@@ -35,8 +35,16 @@ createButton.addEventListener("click", () => {
 
 cancelButton.addEventListener("click", () => {
     editorState.hidden = true;
+    const storedCardJson = localStorage.getItem(STORAGE_KEY);
 
-    if (localStorage.getItem(STORAGE_KEY)) {
+    if (storedCardJson) {
+        const storedCard = JSON.parse(storedCardJson);
+
+        cardForm.elements.title.value = storedCard.title;
+        cardForm.elements.type.value = storedCard.type;
+        cardForm.elements.danger.value = storedCard.danger;
+        cardForm.elements.description.value = storedCard.description;
+
         viewerState.hidden = false;
         workspaceStatus.textContent = "Карточка сохранена";
         sessionStorage.setItem(SESSION_MODE_KEY, "viewer");
