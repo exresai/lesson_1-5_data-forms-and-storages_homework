@@ -37,7 +37,7 @@
         <header class="workspace__header">
           <div>
             <p class="workspace__kicker">Рабочая область</p>
-            <h2 class="workspace__title" id="workspace-title">Ваша тема</h2>
+            <h2 class="workspace__title" id="workspace-title">Реестр аномалий</h2>
           </div>
 
           <p class="workspace__status" aria-live="polite">Данные еще не проверены</p>
@@ -73,19 +73,63 @@
 
             <!-- Это один пример связки label, id и name. Остальные поля создайте сами. -->
             <div class="field">
-              <label class="field__label" for="card-title">Название</label>
+              <label class="field__label" for="card-title">Аномалия</label>
               <input
                 class="field__control"
                 id="card-title"
                 name="title"
                 type="text"
                 minlength="3"
-                placeholder="Например, Городской маршрут"
+                placeholder="Например, тип аномалии"
                 required
               />
               <span class="field__hint">Минимум 3 символа</span>
             </div>
 
+            <div class="field">
+              <label class="field__label" for="card-habitat">Тип аномалии</label>
+              <select
+                class="field__control"
+                id="card-habitat"
+                name="habitat"
+                required
+              >
+                <option value="">Выберите тип</option>
+                <option value="Пространственная">Пространственная</option>
+                <option value="Предметная">Предметная</option>
+                <option value="Акустическая">Акустическая</option>
+                <option value="Временная">Временная</option>
+                <option value="Сущности">Сущности</option>
+              </select>
+              <span class="field__hint">Выберите один вариант</span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="card-danger">Уровень опасности</label>
+              <input
+                class="field__control"
+                id="card-danger"
+                name="danger"
+                type="number"
+                min="1"
+                max="5"
+                required
+              />
+              <span class="field__hint">От 1 до 5</span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="card-description">Описание</label>
+              <textarea
+                class="field__control"
+                id="card-description"
+                name="description"
+                minlength="20"
+                placeholder="Опишите, что вы увидели"
+                required
+              ></textarea>
+              <span class="field__hint">Минимум 20 символов</span>
+            </div>
             <!-- Добавьте поля, которые описывают именно вашу тему. -->
 
             <div class="card-form__actions">
