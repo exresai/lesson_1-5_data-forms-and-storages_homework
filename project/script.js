@@ -15,6 +15,7 @@ const savedCardDescription = document.querySelector("#saved-card-description");
 
 const createButton = document.querySelector('[data-action="create"]');
 const cancelButton = document.querySelector('[data-action="cancel"]');
+const editButton = document.querySelector('[data-action="edit"]');
 
 const cardForm = document.querySelector(".card-form");
 
@@ -26,6 +27,16 @@ createButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
     editorState.hidden = true;
     emptyState.hidden = false;
+});
+
+editButton.addEventListener("click", () => {
+  cardForm.elements.title.value = savedCardTitle.textContent;
+  cardForm.elements.type.value = savedCardType.textContent;
+  cardForm.elements.danger.value = savedCardDanger.textContent;
+  cardForm.elements.description.value = savedCardDescription.textContent;
+
+  viewerState.hidden = true;
+  editorState.hidden = false;
 });
 
 cardForm.addEventListener("submit", (event) => {
@@ -41,7 +52,7 @@ cardForm.addEventListener("submit", (event) => {
     };
 
     console.log(cardData);
-    
+
     savedCardTitle.textContent = cardData.title;
     savedCardType.textContent = cardData.type;
     savedCardDanger.textContent = cardData.danger;
