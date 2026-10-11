@@ -6,7 +6,12 @@ console.log("Стартовый проект подключен")
 
 const emptyState = document.querySelector('[data-state-panel="empty"]');
 const editorState = document.querySelector('[data-state-panel="editor"]');
+const viewerState = document.querySelector('[data-state-panel="viewer"]');
 
+const savedCardTitle = document.querySelector("#saved-card-title");
+const savedCardType = document.querySelector("#saved-card-type");
+const savedCardDanger = document.querySelector("#saved-card-danger");
+const savedCardDescription = document.querySelector("#saved-card-description");
 
 const createButton = document.querySelector('[data-action="create"]');
 const cancelButton = document.querySelector('[data-action="cancel"]');
@@ -36,4 +41,12 @@ cardForm.addEventListener("submit", (event) => {
     };
 
     console.log(cardData);
+    
+    savedCardTitle.textContent = cardData.title;
+    savedCardType.textContent = cardData.type;
+    savedCardDanger.textContent = cardData.danger;
+    savedCardDescription.textContent = cardData.description;
+
+    editorState.hidden = true;
+    viewerState.hidden = false;
 });
