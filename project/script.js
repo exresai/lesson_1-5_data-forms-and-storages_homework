@@ -94,6 +94,9 @@ if (savedCardJson) {
 
     workspaceStatus.textContent = "Карточка сохранена";
     sessionStorage.setItem(SESSION_MODE_KEY, "viewer");
+} else {
+    workspaceStatus.textContent = "Карточек еще нет";
+    sessionStorage.setItem(SESSION_MODE_KEY, "empty");
 }
 
 cardForm.addEventListener("submit", (event) => {
