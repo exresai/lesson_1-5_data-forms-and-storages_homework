@@ -20,6 +20,9 @@ const deleteButton = document.querySelector('[data-action="delete"]');
 
 const cardForm = document.querySelector(".card-form");
 
+const STORAGE_KEY = "anomaly-card";
+const savedCardJson = localStorage.getItem(STORAGE_KEY);
+
 createButton.addEventListener("click", () => {
     emptyState.hidden = true;
     editorState.hidden = false;
@@ -27,7 +30,13 @@ createButton.addEventListener("click", () => {
 
 cancelButton.addEventListener("click", () => {
     editorState.hidden = true;
-    emptyState.hidden = false;
+
+    if (localStorage.getItem(STORAGE_KEY)) {
+        viewerState.hidden = false;
+    } else {
+        emptyState.hidden = false;
+        cardForm.reset();
+    }
 });
 
 editButton.addEventListener("click", () => {
@@ -41,11 +50,25 @@ editButton.addEventListener("click", () => {
 });
 
 deleteButton.addEventListener("click", () => {
+    localStorage.removeItem(STORAGE_KEY);
     viewerState.hidden = true;
     emptyState.hidden = false;
 
     cardForm.reset();
 });
+
+if (savedCardJson) {
+    const savedCard = JSON.parse(savedCardJson);
+
+    savedCardTitle.textContent = savedCard.title;
+    savedCardType.textContent = savedCard.type;
+    savedCardDanger.textContent = savedCard.danger;
+    savedCardDescription.textContent = savedCard.description;
+
+    emptyState.hidden = true;
+    editorState.hidden = true;
+    viewerState.hidden = false;
+}
 
 cardForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -58,6 +81,9 @@ cardForm.addEventListener("submit", (event) => {
         danger: formData.get("danger"),
         description: formData.get("description"),
     };
+
+    const cardJson = JSON.stringify(cardData);
+    localStorage.setItem(STORAGE_KEY, cardJson);
 
     console.log(cardData);
 
