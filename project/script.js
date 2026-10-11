@@ -7,6 +7,7 @@ console.log("Стартовый проект подключен")
 const emptyState = document.querySelector('[data-state-panel="empty"]');
 const editorState = document.querySelector('[data-state-panel="editor"]');
 const viewerState = document.querySelector('[data-state-panel="viewer"]');
+const workspaceStatus = document.querySelector(".workspace__status");
 
 const savedCardTitle = document.querySelector("#saved-card-title");
 const savedCardType = document.querySelector("#saved-card-type");
@@ -21,11 +22,15 @@ const deleteButton = document.querySelector('[data-action="delete"]');
 const cardForm = document.querySelector(".card-form");
 
 const STORAGE_KEY = "anomaly-card";
+const SESSION_MODE_KEY = "anomaly-mode";
 const savedCardJson = localStorage.getItem(STORAGE_KEY);
 
 createButton.addEventListener("click", () => {
     emptyState.hidden = true;
     editorState.hidden = false;
+
+    workspaceStatus.textContent = "Создание карточки";
+    sessionStorage.setItem(SESSION_MODE_KEY, "editor");
 });
 
 cancelButton.addEventListener("click", () => {
@@ -33,9 +38,13 @@ cancelButton.addEventListener("click", () => {
 
     if (localStorage.getItem(STORAGE_KEY)) {
         viewerState.hidden = false;
+        workspaceStatus.textContent = "Карточка сохранена";
+        sessionStorage.setItem(SESSION_MODE_KEY, "viewer");
     } else {
         emptyState.hidden = false;
         cardForm.reset();
+        workspaceStatus.textContent = "Карточек еще нет";
+        sessionStorage.setItem(SESSION_MODE_KEY, "empty");
     }
 });
 
@@ -47,6 +56,9 @@ editButton.addEventListener("click", () => {
 
     viewerState.hidden = true;
     editorState.hidden = false;
+
+    workspaceStatus.textContent = "Редактирование карточки";
+    sessionStorage.setItem(SESSION_MODE_KEY, "editor");
 });
 
 deleteButton.addEventListener("click", () => {
@@ -55,6 +67,9 @@ deleteButton.addEventListener("click", () => {
     emptyState.hidden = false;
 
     cardForm.reset();
+
+    workspaceStatus.textContent = "Карточек еще нет";
+    sessionStorage.setItem(SESSION_MODE_KEY, "empty");
 });
 
 if (savedCardJson) {
@@ -68,6 +83,9 @@ if (savedCardJson) {
     emptyState.hidden = true;
     editorState.hidden = true;
     viewerState.hidden = false;
+
+    workspaceStatus.textContent = "Карточка сохранена";
+    sessionStorage.setItem(SESSION_MODE_KEY, "viewer");
 }
 
 cardForm.addEventListener("submit", (event) => {
@@ -94,4 +112,8 @@ cardForm.addEventListener("submit", (event) => {
 
     editorState.hidden = true;
     viewerState.hidden = false;
+
+    workspaceStatus.textContent = "Карточка сохранена";
+
+    sessionStorage.setItem(SESSION_MODE_KEY, "viewer");
 });
